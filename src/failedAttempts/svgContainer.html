@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="us">
+   <head>
+      <meta charset="UTF-8">
+      <!-- Cross Browser : SVG Library -->
+	   <script src="../svgweb/src/svg.js" data-path="../svgweb/src" data-debug="true"></script>
+      <!-- jquery -->
+      <link href="../jquery-ui/css/smoothness/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+	   <script src="../jquery-ui/js/jquery-1.8.2.js"></script>
+	   <script src="../jquery-ui/js/jquery-ui-1.9.1.custom.js"></script>
+
+      <script> 
+         window.onsvgload = function() 
+         {
+            // Get the root SVG node
+            var fcElt = document.getElementById('flowchartMap').contentDocument;
+            var fcRoot = fcElt.childNodes[0];
+            fcRoot.currentScale=0.3;
+         }
+
+         // jQuery UI Initialisation Processing
+         $(document).ready(function() {
+            $( "#gktPictureScale" ).slider({
+               max: 2.0,
+               min: 0.1,
+               step: 0.05,
+               slide: function(event, ui) { 
+                  // Read currrent slider value
+                  var sliderVal = $( "#gktPictureScale" ).slider( "option", "value" );
+                  // Get the svg graphic handle
+                  var fcElt = document.getElementById('flowchartMap').contentDocument;
+                  var fcRoot = fcElt.childNodes[0];
+                  fcRoot.currentScale= sliderVal;
+                  }
+            });
+         });
+
+      </script>
+      <style type="text/css">
+         #slider { margin: 10px; }
+      </style>
+
+ 
+   </head>
+   <body>
+      <div id="gktSvgContainer" style="border: solid 2px">
+         <div id="gktSvgImage" style="border: solid 0.5px">
+            <!--[if !IE]>-->
+            <object data="sampleFiles/sampleGraph.svg" type="image/svg+xml"
+               width="500" height="500" id="flowchartMap"> <!--<![endif]-->
+            <!--[if lt IE 9]>
+            <object src="sampleFiles/sampleGraph.svg" classid="image/svg+xml"
+               width="500" height="500" id="flowchartMap"> <![endif]-->
+            <!--[if gte IE 9]>
+            <object data="sampleFiles/sampleGraph.svg" type="image/svg+xml"
+               width="500" height="500" id="flowchartMap"> <![endif]-->
+            </object>
+         </div>
+         <div id = "gktSvgControls" style="border: solid 0.5px">
+         <span>
+            <div id="gktPictureScale" style="width: 90%; border: solid 0.5px">
+            </div>
+         </span>
+         </div>
+      </div>
+   </body>
+</html>
